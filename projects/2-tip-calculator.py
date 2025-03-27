@@ -1,3 +1,4 @@
+
 # Day 2 Project – Tip calculator
 
 print("### Tip Calculator ###")
