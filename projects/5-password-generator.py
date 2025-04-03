@@ -7,31 +7,41 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
 symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-characters = [letters, numbers, symbols]
+# Getting user input
 
 print("# Welcome to the Password Generator! #")
 num_letters = int(input("How many letters would you like?\n-> "))
 num_symbols = int(input("How many symbols would you like?\n-> "))
 num_numbers = int(input("How many numbers would you like?\n-> "))
 
-num_characters = (num_letters + num_symbols + num_numbers)
+# Getting the requested amount of each type of character
 
-password = ""
+letters_list = random.choices(letters, k=(num_letters))
+symbols_list = random.choices(symbols, k=(num_symbols))
+nums_list = random.choices(numbers, k=(num_numbers))
 
-for x in range(1, 4):
-    print("")
+# Adding all the characters onto a list
 
-random.choice(characters[(random.randint(0, 3))])
-random.shuffle(characters)
+password_list = []
+password_list.extend(letters_list)
+password_list.extend(symbols_list)
+password_list.extend(nums_list)
 
-for x in range(1, (num_letters + 1)):
-    password += random.choice(letters)
-    
-for x in range(1, (num_symbols + 1)):
-    password += random.choice(symbols)
+# Shuffling the list and converting it into a string
 
-for x in range(1, (num_numbers + 1)):
-    password += random.choice(numbers)
-    
+random.shuffle(password_list)
+random.shuffle(password_list)
+password = ''.join(password_list)
 
 print(f"Your custom-made password is:\n-> {password}")
+
+# Other (longer) method using for loops 
+
+# for x in range(1, (num_letters + 1)):
+#     password += random.choice(letters)
+
+# for x in range(1, (num_symbols + 1)):
+#     password += random.choice(symbols)
+
+# for x in range(1, (num_numbers + 1)):
+#     password += random.choice(numbers)
