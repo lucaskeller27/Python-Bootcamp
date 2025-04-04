@@ -13,6 +13,7 @@ print("# Welcome to the Password Generator! #")
 num_letters = int(input("How many letters would you like?\n-> "))
 num_symbols = int(input("How many symbols would you like?\n-> "))
 num_numbers = int(input("How many numbers would you like?\n-> "))
+is_random_order = input("Do you want the characters to be in random order? (Type Y or N)\n-> ")
 
 # Getting the requested amount of each type of character
 
@@ -27,11 +28,21 @@ password_list.extend(letters_list)
 password_list.extend(symbols_list)
 password_list.extend(nums_list)
 
-# Shuffling the list and converting it into a string
+# Checking if the user gave in the correct input
 
-random.shuffle(password_list)
-random.shuffle(password_list)
-password = ''.join(password_list)
+if type(num_letters) != int or type(num_symbols) != int or type(num_numbers) != int:
+    print("Please type in a whole number.")
+
+# Shuffling the list and converting it into a string / converting the list into a string
+
+if is_random_order == "Y":
+    random.shuffle(password_list)
+    random.shuffle(password_list)
+    password = ''.join(password_list)
+elif is_random_order == "N":
+    password = ''.join(password_list)
+else:
+    print("Please type in a valid option (Y or N)")
 
 print(f"Your custom-made password is:\n-> {password}")
 
