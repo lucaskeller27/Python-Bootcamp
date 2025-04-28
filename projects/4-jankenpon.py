@@ -1,7 +1,7 @@
 
 # Day 4 Project - Jankenpon (Rock-paper-scissors)
 
-import random
+import random, os
 
 rock = '''
     _______
@@ -34,6 +34,7 @@ game_images = [rock, paper, scissors]
 
 # Taking in user input
 
+os.system('cls' if os.name == 'nt' else 'clear')
 user_input = input("What do you choose? Rock, paper, or scissors? (Type R, P, or S)\n-> ")
 
 # Converting user input to integers, and printing the matching ASCII art
