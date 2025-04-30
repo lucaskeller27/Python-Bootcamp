@@ -32,6 +32,8 @@ while not letters_left == 0:
             answer += letter
             letters_left -= 1
             guessed_letters.append(letter)
+        elif letter in guessed_letters:
+            answer += letter
         else:
             answer += "_"
     print(answer)
