@@ -4,12 +4,70 @@ import random, os
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
+stages = [r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', r'''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+lives_left = 6
 word_list = ["aardvark", "baboon", "camel"]
 
 # Selecting a word
 
 chosen_word = random.choice(word_list)
-print(chosen_word)
+# print(chosen_word)
 
 placeholder = ""
 word_length = len(chosen_word)
@@ -18,24 +76,38 @@ for i in range(word_length):
 
 print(placeholder, "\n")
 
-# Asking the user for a letter
-
-letters_left = word_length
+game_over = False
 guessed_letters = []
 
-while not letters_left == 0:
+
+while not game_over:
+    # Asking the user for a letter
     guess = input("Guess a letter:\n-> ").lower()
+    
     # Checking if the guess is correct or not
     answer = ""
     for letter in chosen_word:
         if guess == letter:
             answer += letter
-            letters_left -= 1
             guessed_letters.append(letter)
         elif letter in guessed_letters:
             answer += letter
         else:
             answer += "_"
-    print(answer)
+    
+    if guess not in chosen_word:
+        lives_left -= 1
 
-# TODO-2: Change the for loop so that you keep the previous correct letters in display.
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("\n", answer, "\n")
+    print(stages[lives_left])
+    
+    # Checking if the game should end
+    
+    if lives_left == 0:
+        game_over = True
+        print(f"You lose. The answer was \"{chosen_word}\". To the gallows!")
+    
+    if "_" not in answer:
+        game_over = True
+        print("Congratulations, you win!")
