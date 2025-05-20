@@ -1,68 +1,12 @@
 # Day 7 Project - Hangman
 
-import random, os
+import random, os, hangman_art
+from hangman_words import word_list
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
-stages = [r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', r'''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
 lives_left = 6
-word_list = ["aardvark", "baboon", "camel"]
+print(hangman_art.logo)
 
 # Selecting a word
 
@@ -78,6 +22,7 @@ print(placeholder, "\n")
 
 game_over = False
 guessed_letters = []
+made_guesses = []
 
 
 while not game_over:
@@ -95,12 +40,23 @@ while not game_over:
         else:
             answer += "_"
     
-    if guess not in chosen_word:
-        lives_left -= 1
-
     os.system('cls' if os.name == 'nt' else 'clear')
+    print(hangman_art.logo, "\n")
+    
+    # Telling the user if their guess is correct or not
+    
+    if guess in made_guesses:
+        print(f"You've already guessed the letter \"{guess}\". Try another one!")
+    elif guess not in chosen_word:
+        lives_left -= 1
+        print(f"Your guess ({guess}) was incorrect. You lose a life! ({lives_left}/6 lives left)")
+    elif guess in chosen_word:
+        print(f"Your guess ({guess}) was correct!")
+
+    made_guesses.append(guess)
+    
     print("\n", answer, "\n")
-    print(stages[lives_left])
+    print(hangman_art.stages[lives_left])
     
     # Checking if the game should end
     
