@@ -1,4 +1,4 @@
-# Day 4 Project - Jankenpon (Rock-paper-scissors)
+# Day 4 Project - Rock-paper-scissors
 
 import random, os
 
